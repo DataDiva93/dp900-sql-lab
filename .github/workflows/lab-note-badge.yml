@@ -21,6 +21,10 @@ jobs:
           count=$(ls notes | grep -E 'lab-[0-9]+.*\.md' | wc -l)
           echo "lab_count=$count" >> $GITHUB_OUTPUT
 
+      - name: 🗂️ Ensure badge directory exists
+        run: mkdir -p badge
+
+
       - name: 🖊️ Generate badge
         uses: emibcn/badge-action@v1
         with:
