@@ -1,10 +1,10 @@
+
 name: 🛡️ Update Lab Note Badge
 
 on:
   push:
     paths:
       - 'notes/**'
-      - '.github/workflows/lab-note-badge.yml'
   workflow_dispatch:
 
 jobs:
@@ -19,25 +19,23 @@ jobs:
         id: count
         run: |
           count=$(ls notes | grep -E 'lab-[0-9]+.*\.md' | wc -l)
-          echo "lab_count=$count" >> $GITHUB_OUTPUT
+          echo "count=$count" >> $GITHUB_ENV
 
-      - name: 🗂️ Ensure badge directory exists
-        run: mkdir -p badge
-
-
-      - name: 🖊️ Generate badge
-        uses: emibcn/badge-action@v1
+      - name: 💾 Save badge to Gist
+        uses: schneegans/dynamic-badges-action@v1.6.0
         with:
-          label: 'Lab Notes'
-          status: '${{ steps.count.outputs.lab_count }} Completed'
-          color: 'brightgreen'
-          path: 'badge/lab-notes-badge.svg'
+          auth: ${{ secrets.GITHUB_TOKEN }}
+          gistID: ${{ secrets.BADGE_GIST_ID }}
+          filename: lab-notes-badge.json
+          label: Lab Notes
+          message: "${{ env.count }} Completed"
+          color: brightgreen
 
-      - name: 💾 Commit badge
+      - name: 💾 Commit badge (force)
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add badge/lab-notes-badge.svg
-          git commit -m "🔄 Auto-update lab notes badge"
+          git commit -m "🔄 Auto-update lab notes badge" || echo "No changes to commit"
+          git push --force
 
-          git push
