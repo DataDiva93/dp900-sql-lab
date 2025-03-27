@@ -1,9 +1,6 @@
 ## 📝 Lab Notes
-![Lab Notes](badge/lab-notes-badge.svg)
+![Lab Notes](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/DataDiva93/dd52c3dd5d2c71d86f41bfed54c0a865/raw/lab-notes-badge.json)
 
-
-
-[![Lab Notes](https://img.shields.io/badge/Lab%20Notes-3%20Completed-brightgreen)](notes/README.md)
 
 
 📂 [View all notes here](notes/README.md)
