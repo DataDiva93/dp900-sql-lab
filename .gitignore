@@ -1,0 +1,21 @@
+# Ignore node/python/OS system files (if added later)
+node_modules/
+__pycache__/
+*.pyc
+
+# Ignore IDE/editor config files
+.vscode/
+.idea/
+
+# Ignore OS junk
+.DS_Store
+Thumbs.db
+
+# Ignore logs or temporary files
+*.log
+*.tmp
+
+# Ignore notebooks' checkpoint files
+.ipynb_checkpoints/
+
+
