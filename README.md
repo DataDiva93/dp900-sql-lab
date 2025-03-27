@@ -1,4 +1,8 @@
 ## 📝 Lab Notes
+![Lab Notes](badge/lab-notes-badge.svg)
+
+
+
 [![Lab Notes](https://img.shields.io/badge/Lab%20Notes-3%20Completed-brightgreen)](notes/README.md)
 
 

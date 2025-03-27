@@ -1,0 +1,39 @@
+name: 🛡️ Update Lab Note Badge
+
+on:
+  push:
+    paths:
+      - 'notes/**'
+      - '.github/workflows/lab-note-badge.yml'
+  workflow_dispatch:
+
+jobs:
+  update-badge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repo
+        uses: actions/checkout@v3
+
+      - name: 🔢 Count lab notes
+        id: count
+        run: |
+          count=$(ls notes | grep -E 'lab-[0-9]+.*\.md' | wc -l)
+          echo "lab_count=$count" >> $GITHUB_OUTPUT
+
+      - name: 🖊️ Generate badge
+        uses: emibcn/badge-action@v1
+        with:
+          label: 'Lab Notes'
+          status: '${{ steps.count.outputs.lab_count }} Completed'
+          color: 'brightgreen'
+          path: 'badge/lab-notes-badge.svg'
+
+      - name: 💾 Commit badge
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add badge/lab-notes-badge.svg
+          git commit -m "🔄 Auto-update lab notes badge"
+
+          git push
