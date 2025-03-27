@@ -20,6 +20,7 @@ jobs:
           count=$(ls notes | grep -E 'lab-[0-9]+.*\.md' | wc -l)
           echo "count=$count" >> $GITHUB_ENV
 
+
       - name: 🛡️ Update badge via Gist
         uses: schneegans/dynamic-badges-action@v1.6.0
         with:
@@ -29,5 +30,4 @@ jobs:
           label: Lab Notes
           message: "${{ env.count }} Completed"
           color: brightgreen
-
 
