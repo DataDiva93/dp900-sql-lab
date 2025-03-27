@@ -31,11 +31,15 @@ jobs:
           message: "${{ env.count }} Completed"
           color: brightgreen
 
-      - name: 💾 Commit badge (force)
+            - name: 💾 Commit badge using GitHub CLI
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add badge/lab-notes-badge.svg
           git commit -m "🔄 Auto-update lab notes badge" || echo "No changes to commit"
-          git push --force
+          git pull --rebase
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
